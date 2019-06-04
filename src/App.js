@@ -36,16 +36,30 @@ import faker from 'faker';
 // }
 
 class App extends React.Component{
-  render(){
+  //Constructor is initialized first before anything else.
+  //super(props) inside the constructor if we have to use this.props, for example
+  constructor(props){
+    super(props);
+    this.state={lat: null};
     window.navigator.geolocation.getCurrentPosition(
-      res=> console.log(res),
-      err=> console.log(err)
+      res=> {
+        console.log(res)
+        this.setState({
+          lat: res.coords.latitude
+        });
+      },
+      err=> {
+        console.log(err)
+      }
     );
 
+  }
+
+  render(){
     return (
       <div>
         <div>
-          Lattitude:
+          Lattitude: {this.state.lat}
         </div>
         <div className="ui container comments">
           <ApprovalCard>
