@@ -1,26 +1,78 @@
 import React from 'react';
-import logo from './logo.svg';
+// import ReactDOM from 'react-dom'
 import './App.css';
+import CommentDetail from './CommentDetail';
+import ApprovalCard from './ApprovalCard';
+import faker from 'faker';
+// function getTime() {
+//   return (new Date()).toLocaleTimeString()
+// }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// function App() {
+//   return (
+//     <div className="ui container comments">
+//       <ApprovalCard>
+//         <div>
+//           <h4>Warning!</h4>
+//             Are you sure you want to do this?
+//         </div>
+//       </ApprovalCard>
+
+//       <ApprovalCard>
+//         <CommentDetail 
+//           author ={faker.name.findName()} 
+//           content="Nice Post!"
+//           avatar = {faker.image.avatar()}
+//         />
+//       </ApprovalCard>
+//       <ApprovalCard>
+//         <CommentDetail author ={faker.name.findName()} content="Howdy!" avatar = {faker.image.avatar()} />
+//       </ApprovalCard>
+//       <ApprovalCard>
+//         <CommentDetail author ={faker.name.findName()} content="I love the weather!" avatar = {faker.image.avatar()} />
+//       </ApprovalCard>
+//     </div>
+//   );
+// }
+
+class App extends React.Component{
+  render(){
+    window.navigator.geolocation.getCurrentPosition(
+      res=> console.log(res),
+      err=> console.log(err)
+    );
+
+    return (
+      <div>
+        <div>
+          Lattitude:
+        </div>
+        <div className="ui container comments">
+          <ApprovalCard>
+            <div>
+              <h4>Warning!</h4>
+               Are you sure you want to do this?
+            </div>
+          </ApprovalCard>
+
+          <ApprovalCard>
+            <CommentDetail 
+              author ={faker.name.findName()} 
+              content="Nice Post!"
+              avatar = {faker.image.avatar()}
+            />
+          </ApprovalCard>
+          <ApprovalCard>
+            <CommentDetail author ={faker.name.findName()} content="Howdy!" avatar = {faker.image.avatar()} />
+          </ApprovalCard>
+          <ApprovalCard>
+            <CommentDetail author ={faker.name.findName()} content="I love the weather!" avatar = {faker.image.avatar()} />
+          </ApprovalCard>
+        </div>
+      </div>
+      
+    )
+  }
 }
 
 export default App;
