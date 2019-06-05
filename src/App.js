@@ -4,6 +4,7 @@ import './App.css';
 import CommentDetail from './CommentDetail';
 import ApprovalCard from './ApprovalCard';
 import faker from 'faker';
+import SeasonDisplay from './SeasonDisplay';
 // function getTime() {
 //   return (new Date()).toLocaleTimeString()
 // }
@@ -34,6 +35,15 @@ import faker from 'faker';
 //     </div>
 //   );
 // }
+const Spinner=()=>{
+  return (
+    <div className="ui active dimmer">
+      <div className="ui big text loader">
+        Loading...
+      </div>
+    </div>
+  )
+}
 
 class App extends React.Component{
   //Constructor is initialized first before anything else.
@@ -44,11 +54,20 @@ class App extends React.Component{
       lat: null,
       errorMessage: ""
     };
+
+    window.navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({ lat: position.coords.latitude })
+      },
+      err => {
+        this.setState({ errorMessage: err.message })
+      }  
+  );
   };
 
 
   componentDidMount(){
-    console.log("In")
+    console.log("component did mount")
     window.navigator.geolocation.getCurrentPosition(
         position => {
           this.setState({ lat: position.coords.latitude })
@@ -89,36 +108,42 @@ class App extends React.Component{
             )
   }
 
-
-  render(){
-    
+  renderWeatherBox =()=>{
     if (this.state.errorMessage && !this.state.lat) {
-        console.log('1')
-        return (
+      console.log('1')
+      return (
+      <div className="ui container">
         <div>
+          Error: {this.state.errorMessage} 
+        </div>}
+      </div>
+        )
+    }
+    if (this.state.lat && this.state.errorMessage ==="") {  
+      console.log('2')  
+      return (
+        <div className="ui container">
           <div>
-            Error: {this.state.errorMessage} 
+            Latitude: {this.state.lat}
           </div>
-          {this.renderMessageBox()}
         </div>
           )
     }
-    if (this.state.lat && !this.state.errorMessage) {  
-        console.log('2')        
-        return (
-          <div>
-            <div>
-              Latitude: {this.state.lat}
-            </div>
-            {this.renderMessageBox()}
-          </div>
-            )
-    }
     if (this.state.lat == null && this.state.errorMessage === ""){
-        console.log('3')
-        return <div>Loading!</div>
+      console.log('3')
+      return (Spinner())
     }
-      
+  }
+
+  render(){
+    
+    return(
+      <div>
+        {this.renderWeatherBox()}
+        <SeasonDisplay lat={this.state.lat}/>
+        {this.renderMessageBox()}
+      </div>
+    )
   }
 }
 
