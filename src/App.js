@@ -5,36 +5,7 @@ import CommentDetail from './CommentDetail';
 import ApprovalCard from './ApprovalCard';
 import faker from 'faker';
 import SeasonDisplay from './SeasonDisplay';
-// function getTime() {
-//   return (new Date()).toLocaleTimeString()
-// }
 
-// function App() {
-//   return (
-//     <div className="ui container comments">
-//       <ApprovalCard>
-//         <div>
-//           <h4>Warning!</h4>
-//             Are you sure you want to do this?
-//         </div>
-//       </ApprovalCard>
-
-//       <ApprovalCard>
-//         <CommentDetail 
-//           author ={faker.name.findName()} 
-//           content="Nice Post!"
-//           avatar = {faker.image.avatar()}
-//         />
-//       </ApprovalCard>
-//       <ApprovalCard>
-//         <CommentDetail author ={faker.name.findName()} content="Howdy!" avatar = {faker.image.avatar()} />
-//       </ApprovalCard>
-//       <ApprovalCard>
-//         <CommentDetail author ={faker.name.findName()} content="I love the weather!" avatar = {faker.image.avatar()} />
-//       </ApprovalCard>
-//     </div>
-//   );
-// }
 const Spinner=()=>{
   return (
     <div className="ui active dimmer">
@@ -67,7 +38,6 @@ class App extends React.Component{
 
 
   componentDidMount(){
-    console.log("component did mount")
     window.navigator.geolocation.getCurrentPosition(
         position => {
           this.setState({ lat: position.coords.latitude })
@@ -109,39 +79,44 @@ class App extends React.Component{
   }
 
   renderWeatherBox =()=>{
-    if (this.state.errorMessage && !this.state.lat) {
-      console.log('1')
-      return (
-      <div className="ui container">
-        <div>
-          Error: {this.state.errorMessage} 
-        </div>}
-      </div>
-        )
-    }
-    if (this.state.lat && this.state.errorMessage ==="") {  
-      console.log('2')  
-      return (
-        <div className="ui container">
-          <div>
-            Latitude: {this.state.lat}
-          </div>
-        </div>
-          )
-    }
+    // if (this.state.errorMessage && !this.state.lat) {
+    //   console.log('1')
+    //   return (
+    //   <div className="ui container">
+    //     <div>
+    //       <h1>
+    //         Error: {this.state.errorMessage}
+    //       </h1>
+           
+    //     </div>}
+    //   </div>
+    //     )
+    // }
+    // if (this.state.lat && this.state.errorMessage ==="") {  
+    //   console.log('2')  
+    //   return (
+    //     <div className="ui container">
+    //       <div>
+    //         <h1>
+    //           Latitude: {this.state.lat}
+    //         </h1>
+    //       </div>
+    //     </div>
+    //       )
+    // }
     if (this.state.lat == null && this.state.errorMessage === ""){
       console.log('3')
       return (Spinner())
     }
+
   }
 
   render(){
-    
     return(
       <div>
         {this.renderWeatherBox()}
         <SeasonDisplay lat={this.state.lat}/>
-        {this.renderMessageBox()}
+        {/* {this.renderMessageBox()} */}
       </div>
     )
   }
