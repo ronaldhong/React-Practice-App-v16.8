@@ -1,6 +1,8 @@
 import React from 'react';
 // import ReactDOM from 'react-dom'
 import './App.css';
+import axios from 'axios';
+import unsplash from '../api/unsplash';
 import CommentDetail from './commentDetail/CommentDetail';
 import ApprovalCard from './approvalCard/ApprovalCard';
 import faker from 'faker';
@@ -26,13 +28,18 @@ class App extends React.Component{
     this.state={
       lat: null,
       errorMessage: "",
-      showLoader: false
+      showLoader: false,
+      images: []
     };
   };
 
-  onSearchSubmit(term){
-    console.log(term)
-  }
+  onSearchSubmit = async (term) =>{
+    const res =  await unsplash
+    .get('/search/photos', {
+      params: {query: term}
+    });
+    this.setState({images: res.data.results});
+  };
 
 
   componentDidMount(){
@@ -89,7 +96,10 @@ class App extends React.Component{
         <div>
           <SeasonDisplay lat={this.state.lat}/>
           <SearchBar onSubmit={this.onSearchSubmit} />
-          {this.renderMessageBox()}
+          <div>
+            Found : {this.state.images.length} images
+          </div>
+          {/* {this.renderMessageBox()} */}
        </div>
       </ParallaxProvider>  
     )
