@@ -33,7 +33,6 @@ const SeasonDisplay = (props)=>{
             <div  className={`${season}`}>
                 <i className={`${icon} icon massive`}/>
                 <h1 className={`season-display ${season}`}><Typist><Typist.Delay ms={1000}/>Current Season at your Location:<Typist.Delay ms={1500}/>{season}</Typist></h1>
-                <SearchBar/>
                 <i className={`icon-right ${icon} icon massive`}/>
             </div>
         </Parallax>

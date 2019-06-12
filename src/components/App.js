@@ -6,6 +6,7 @@ import ApprovalCard from './approvalCard/ApprovalCard';
 import faker from 'faker';
 import SeasonDisplay from './seasonDisplay/SeasonDisplay';
 import { ParallaxProvider } from 'react-scroll-parallax';
+import SearchBar from './searchBar/SearchBar';
 
 const Spinner=()=>{
     return (
@@ -28,6 +29,10 @@ class App extends React.Component{
       showLoader: false
     };
   };
+
+  onSearchSubmit(term){
+    console.log(term)
+  }
 
 
   componentDidMount(){
@@ -83,7 +88,8 @@ class App extends React.Component{
       <ParallaxProvider>
         <div>
           <SeasonDisplay lat={this.state.lat}/>
-          {/* {this.renderMessageBox()} */}
+          <SearchBar onSubmit={this.onSearchSubmit} />
+          {this.renderMessageBox()}
        </div>
       </ParallaxProvider>  
     )
