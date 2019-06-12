@@ -1,24 +1,24 @@
 import React from 'react';
 // import ReactDOM from 'react-dom'
 import './App.css';
-import axios from 'axios';
 import unsplash from '../api/unsplash';
 import CommentDetail from './commentDetail/CommentDetail';
 import ApprovalCard from './approvalCard/ApprovalCard';
 import faker from 'faker';
 import SeasonDisplay from './seasonDisplay/SeasonDisplay';
+import ImageList from './imageList/ImageList';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import SearchBar from './searchBar/SearchBar';
 
-const Spinner=()=>{
-    return (
-      <div className="ui active dimmer">
-        <div className="ui big text loader">
-          Loading...
-        </div>
-      </div>
-    )
-};
+// const Spinner=()=>{
+//     return (
+//       <div className="ui active dimmer">
+//         <div className="ui big text loader">
+//           Loading...
+//         </div>
+//       </div>
+//     )
+// };
 
 class App extends React.Component{
   //Constructor is initialized first before anything else.
@@ -96,9 +96,7 @@ class App extends React.Component{
         <div>
           <SeasonDisplay lat={this.state.lat}/>
           <SearchBar onSubmit={this.onSearchSubmit} />
-          <div>
-            Found : {this.state.images.length} images
-          </div>
+          <ImageList images ={ this.state.images} />
           {/* {this.renderMessageBox()} */}
        </div>
       </ParallaxProvider>  

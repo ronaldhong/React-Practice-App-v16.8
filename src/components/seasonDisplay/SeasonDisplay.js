@@ -2,7 +2,6 @@ import './SeasonDisplay.css'
 import React from 'react';
 import Typist from 'react-typist';
 import { Parallax } from 'react-scroll-parallax';
-import SearchBar from '../searchBar/SearchBar';
 
 const seasonConfig = {
     Summer:{
@@ -26,16 +25,16 @@ const getSeason =(lat, month) =>{
 
 const SeasonDisplay = (props)=>{
     const season =getSeason(props.lat? props.lat : 29.76, new Date().getMonth());
-    const {text , icon} = seasonConfig[season];
+    const {icon} = seasonConfig[season];
 
     return (
-        <Parallax className="custom-class" y={[-30, 30]} tagOuter="figure">
+        // <Parallax className="custom-class" y={[-30, 30]} tagOuter="figure">
             <div  className={`${season}`}>
                 <i className={`${icon} icon massive`}/>
                 <h1 className={`season-display ${season}`}><Typist><Typist.Delay ms={1000}/>Current Season at your Location:<Typist.Delay ms={1500}/>{season}</Typist></h1>
                 <i className={`icon-right ${icon} icon massive`}/>
             </div>
-        </Parallax>
+        // </Parallax>
     )
 };
 
